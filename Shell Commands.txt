@@ -1,0 +1,173 @@
+Microsoft Windows [Version 10.0.18363.778]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py startapp booksAuthorsApp
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py makemigrations
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py makemigrations
+Migrations for 'booksAuthorsApp':
+  booksAuthorsApp\migrations\0001_initial.py
+    - Create model Author
+    - Create model Book
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, booksAuthorsApp, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying booksAuthorsApp.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 22:45:29) [MSC v.1916 32 bit (Intel)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.13.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from booksAuthorsApp.models import *
+
+In [2]: Book.objects.create(title="Python", desc="A book about Python")
+Out[2]: <Book: Book object (1)>
+
+In [3]: Book.objects.create(title="C Sharp", desc="A book about C Sharp")
+Out[3]: <Book: Book object (2)>
+
+In [4]: Book.objects.create(title="Java", desc="A book about Java")
+Out[4]: <Book: Book object (3)>
+
+In [5]: Book.objects.create(title="PHP", desc="A book about PHP")
+Out[5]: <Book: Book object (4)>
+
+In [6]: Book.objects.create(title="Ruby", desc="A book about Ruby")
+Out[6]: <Book: Book object (5)>
+
+In [8]: Author.objects.create(first_name="Jane", last_name="Austen")
+Out[8]: <Author: Author object (1)>
+
+In [9]: Author.objects.create(first_name="Emily", last_name="Dickinson")
+Out[9]: <Author: Author object (2)>
+
+In [10]: Author.objects.create(first_name="Fyodey", last_name="Dostoesvky")
+Out[10]: <Author: Author object (3)>
+
+In [11]: Author.objects.create(first_name="William", last_name="Shakespeare")
+Out[11]: <Author: Author object (4)>
+
+In [12]: Author.objects.create(first_name="Lau", last_name="Tzu")
+Out[12]: <Author: Author object (5)>
+
+In [13]: exit()
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to author without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> ""
+Migrations for 'booksAuthorsApp':
+  booksAuthorsApp\migrations\0002_author_notes.py
+    - Add field notes to author
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, booksAuthorsApp, contenttypes, sessions
+Running migrations:
+  Applying booksAuthorsApp.0002_author_notes... OK
+
+(djangoPy3Env) C:\Users\JaseLeu\Documents\codingDojo\pythonStack\django\djangoIntro\booksAuthorsProj>python manage.py shell
+Python 3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 22:45:29) [MSC v.1916 32 bit (Intel)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.13.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from booksAuthorsApp.models import *
+
+In [2]: cSharp = Book.objects.get(title="C Sharp")
+
+In [3]: cSharp.title = "C#"
+
+In [4]: cSharp.save()
+
+In [5]: bill = Author.objects.get(id=4)
+
+In [6]: bill.first_name = "Bill"
+
+In [8]: bill.save()
+
+In [10]: book1=Book.objects.get(id=1)
+
+In [11]: book2=Book.objects.get(id=2)
+
+In [15]: book1.authors.add(author1)
+
+In [16]: book2.authors.add(author1)
+
+In [17]: author2=Author.objects.get(id=2)
+
+In [18]: book1.authors.add(author2)
+
+In [19]: book2.authors.add(author2)
+
+In [20]: book3 = Book.objects.get(id=3)
+
+In [21]: book3.authors.add(author2)
+
+In [22]: author3=Author.objects.get(id=3)
+
+In [23]: author4=Author.objects.get(id=4)
+
+In [24]: author5=Author.objects.get(id=5)
+
+In [25]: book4=Book.objects.get(id=4)
+
+In [26]: book5=Book.objects.get(id=5)
+
+In [27]: book1.authors.add(author3)
+
+In [28]: book2.authors.add(author3)
+
+In [29]: book3.authors.add(author3)
+
+In [30]: book4.authors.add(author3)
+
+In [31]: book1.authors.add(author4)
+
+In [32]: book2.authors.add(author4)
+
+In [33]: book3.authors.add(author4)
+
+In [34]: book4.authors.add(author4)
+
+In [35]: book5.authors.add(author4)
+
+In [36]: book3.authors.all()
+Out[36]: <QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+In [37]: book3.authors.remove(author1)
+
+In [38]: book2.authors.add(author5)
+
+In [39]: author3.books.all()
+Out[39]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+In [40]: book5.authors.all()
+Out[40]: <QuerySet [<Author: Author object (4)>]>
+
