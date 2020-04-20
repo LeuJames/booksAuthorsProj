@@ -3,40 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Add a Book</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></head>
 <body>
-    <div>
-        <a href="/">Home</a>
-        <a href="/addBook">Books</a>
-        <a href="/addAuthor">Authors</a>
-    </div>
-    <div>
-        <h1>Add a Book</h1>
-        <form action="/submitBook" method="POST">
-            {% csrf_token %}
-            <p>Title: <input type="text" name="title"></p>
-            <p>Description: <input type="text" name="desc"></p>
-            <button type="Submit">Add</button>
-        </form>
-    </div>
-    <div>
-        <table>
-            <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                {% for book in books %}
-                <tr>
-                    <td>{{ book.id }}</td>
-                    <td>{{ book.title }}</td>
-                    <td><a href="/book/{{book.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="navbar navbar-expand bg-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="navbar-brand" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/addBook">Add A Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/addAuthor">Add an Author</a>
+                </li>
+            </ul>
+        </div>
+        <div class="jumbotron row">
+            <div class="form-group col">
+                <h1>Add a Book</h1>
+                <form action="/submitBook" method="POST">
+                    {% csrf_token %}
+                    <p>Title: <input type="text" name="title"></p>
+                    <p>Description:</p>
+                    <textarea name="desc" rows="10" cols="30">Enter description here</textarea>
+                    <p><button type="Submit">Add</button></p>
+                </form>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                        <tr>
+                            <th scope="row">{{ book.id }}</td>
+                            <td>{{ book.title }}</td>
+                            <td><a href="/book/{{book.id}}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

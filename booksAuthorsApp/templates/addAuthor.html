@@ -3,41 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add an Author</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></head>
 </head>
 <body>
-    <div>
-        <a href="/">Home</a>
-        <a href="/addBook">Books</a>
-        <a href="/addAuthor">Authors</a>
-    </div>
-    <div>
-        <h1>Add an Author</h1>
-        <form action="/submitAuthor" method="POST">
-            {% csrf_token %}
-            <p>First Name: <input type="text" name="first_name"></p>
-            <p>Last Name: <input type="text" name="last_name"></p>
-            <p>Notes <input type="text" name="notes"></p>
-            <button type="Submit">Add</button>
-        </form>
-    </div>
-    <div>
-        <table>
-            <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                {% for author in authors %}
-                <tr>
-                    <td>{{ author.id }}</td>
-                    <td>{{ author.first_name }} {{ author.last_name }}</td>
-                    <td><a href="/author/{{author.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="navbar navbar-expand bg-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="navbar-brand" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/addBook">Add A Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/addAuthor">Add an Author</a>
+                </li>
+            </ul>
+        </div>
+        <div class="jumbotron row">
+            <div class="form-group col">
+                <h1>Add an Author</h1>
+                <form action="/submitAuthor" method="POST">
+                    {% csrf_token %}
+                    <p>First Name: <input type="text" name="first_name"></p>
+                    <p>Last Name: <input type="text" name="last_name"></p>
+                    <p>Notes</p>
+                    <textarea name="notes" rows="10" cols="30">Enter author notes here</textarea> 
+                    <button type="Submit">Add</button>
+                </form>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </thead>
+                    <tbody>
+                        {% for author in authors %}
+                        <tr>
+                            <th scope="col">{{ author.id }}</td>
+                            <td>{{ author.first_name }} {{ author.last_name }}</td>
+                            <td><a href="/author/{{author.id}}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>        
+        </div>
     </div>
 </body>
 </html>
